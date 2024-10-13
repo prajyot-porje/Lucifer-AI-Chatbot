@@ -1,7 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
+
+
 
 export default function Home() {
-  return (
+    const [text , setText] = useState();
+    
+    const searchQuery = ()=> {
+        console.log("sending question to api")
+    }
+    const handleonChange = (event)=>{
+        setText(event.target.value)
+    }
+    return (
     <>
     <div className="right1 h-[100vh] bg-black w-10/12 flex content-center justify-center items-center flex-col">
             <div className="text-center text-slate-400 w-full text-3xl mt-16 mb-10 font-bold">
@@ -12,10 +23,10 @@ export default function Home() {
                 <svg
                   stroke="currentColor"
                   fill="none"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   viewBox="0 0 24 24"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   className="h-6 w-6"
                   height="1em"
                   width="1em"
@@ -47,14 +58,14 @@ export default function Home() {
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   stroke="currentColor"
                   aria-hidden="true"
                   className="h-6 w-6"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
                   ></path>
                 </svg>
@@ -73,10 +84,10 @@ export default function Home() {
                 <svg
                   stroke="currentColor"
                   fill="none"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   viewBox="0 0 24 24"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   className="h-6 w-6"
                   height="1em"
                   width="1em"
@@ -113,16 +124,20 @@ export default function Home() {
                   type="text"
                   name="text"
                   id="questionInput"
+                  value={text}
+                  onChange={handleonChange}
+                  
                 />
 
-                <button id="sendButton" className="relative -left-20 pl-10">
+                <button id="sendButton" onClick={searchQuery} className="relative -left-20 pl-10">
+                  <Link  to="/Searchpage"> 
                   <svg
                     stroke="currentColor"
                     fill="none"
-                    stroke-width="2"
+                    strokeWidth="2"
                     viewBox="0 0 24 24"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     className="h-4 w-4 mr-1"
                     height="1em"
                     width="1em"
@@ -131,6 +146,7 @@ export default function Home() {
                     <line x1="22" y1="2" x2="11" y2="13"></line>
                     <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
                   </svg>
+                  </Link>
                 </button>
               </div>
             </div>
