@@ -15,15 +15,18 @@ import {
 function App() {
   return (
     <>
-    <Router>
-      <div className="bg-black-50">
-        <div className="flex text-white h-[100vh]">
-        <Left/>   
+    <Router className="bg-black">
+      <div className="bg-black f">
+        <div className="flex text-white ">
+          
+           <Left/>   
+
+        
         <Routes>
         <Route exact path="/Searchpage" element={<Searchpage />} />
         <Route exact path="/" element={<Home />} />
         </Routes>
-                
+        
           
         </div>
       </div>

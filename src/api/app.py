@@ -1,12 +1,14 @@
-import time
 from flask import Flask, jsonify, request
 from flask_pymongo import PyMongo
-import os
 from urllib.parse import quote_plus
 import google.generativeai as genai
+from flask_cors import CORS
+
+app = Flask(__name__)
+CORS(app)  # Allows CORS for the entire app
 
 # Configure Gemini AI API
-genai.configure(api_key="YOUR_GEMINI_API_KEY")
+genai.configure(api_key="AIzaSyDsI_FKZF562_WKgOa61lgJ5BfNnzJ_hAQ")
 
 # Set up the model
 generation_config = {
@@ -41,8 +43,6 @@ model = genai.GenerativeModel(
     safety_settings=safety_settings
 )
 
-app = Flask(__name__)
-
 # MongoDB connection parameters
 DB_USERNAME = "prajyotporje"
 DB_PASSWORD = "Prajyot@17"
@@ -54,7 +54,7 @@ encoded_password = quote_plus(DB_PASSWORD)
 MONGO_URI = f"mongodb+srv://{encoded_username}:{encoded_password}@{DB_CLUSTER}?retryWrites=true&w=majority"
 
 app.config["MONGO_URI"] = MONGO_URI
-mongo = PyMongo(app, uri=MONGO_URI)
+mongo = PyMongo(app)
 
 @app.route("/api/chat", methods=["POST"])
 def qa():
@@ -62,7 +62,7 @@ def qa():
         try:
             question = request.json.get("question")
             chat = mongo.db.chats.find_one({"question": question})
-            
+
             if chat:
                 data = {"question": question, "answer": chat['answer']}
                 return jsonify(data)
@@ -76,6 +76,15 @@ def qa():
         except Exception as e:
             return jsonify({"error": str(e)}), 500
     return jsonify({"result": "invalid request method"})
+
+@app.route("/api/chats", methods=["GET"])
+def get_chats():
+    try:
+        chats = list(mongo.db.chats.find({}, {"_id": 0, "question": 1, "answer": 1}))
+        return jsonify(chats)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
