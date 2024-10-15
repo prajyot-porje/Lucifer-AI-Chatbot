@@ -3,12 +3,17 @@ from flask_pymongo import PyMongo
 from urllib.parse import quote_plus
 import google.generativeai as genai
 from flask_cors import CORS
+import os
+from dotenv import load_dotenv
+
+# Load environment variables from a .env file (if present)
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)  # Allows CORS for the entire app
 
 # Configure Gemini AI API
-genai.configure(api_key="AIzaSyDsI_FKZF562_WKgOa61lgJ5BfNnzJ_hAQ")
+genai.configure(api_key=os.getenv("GENAI_API_KEY"))
 
 # Set up the model
 generation_config = {
@@ -43,17 +48,25 @@ model = genai.GenerativeModel(
     safety_settings=safety_settings
 )
 
-# MongoDB connection parameters
-DB_USERNAME = "prajyotporje"
-DB_PASSWORD = "Prajyot@17"
-DB_CLUSTER = "cluster17.54ifx5j.mongodb.net/chatgpt"
 
+# MongoDB connection parameters
+DB_USERNAME = os.getenv("MONGO_USERNAME")
+DB_PASSWORD = os.getenv("MONGO_PASSWORD")
+DB_CLUSTER = os.getenv("MONGO_CLUSTER")
+
+# URL-encode the username and password
 encoded_username = quote_plus(DB_USERNAME)
 encoded_password = quote_plus(DB_PASSWORD)
 
+# Construct the MongoDB URI]
 MONGO_URI = f"mongodb+srv://{encoded_username}:{encoded_password}@{DB_CLUSTER}?retryWrites=true&w=majority"
 
-app.config["MONGO_URI"] = MONGO_URI
+
+# Set the database name separately
+DB_NAME = "chatgpt"  # Specify your actual database name
+app.config["MONGO_URI"] = MONGO_URI + f"/{DB_NAME}"
+
+# Initialize PyMongo
 mongo = PyMongo(app)
 
 @app.route("/api/chat", methods=["POST"])
@@ -85,6 +98,5 @@ def get_chats():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    app.run(debug=True)
