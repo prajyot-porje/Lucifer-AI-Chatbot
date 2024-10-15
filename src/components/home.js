@@ -12,7 +12,7 @@ export default function Home() {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:5000/api/chat", {
+      const response = await axios.post("https://lucifer-ai-chatbot-backend.onrender.com", {
         question,
       });
       const answer = response.data.answer; //for storing the answer
