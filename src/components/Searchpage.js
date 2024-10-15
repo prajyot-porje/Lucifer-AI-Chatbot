@@ -1,11 +1,20 @@
-import '../App.css'
-import React from 'react';
-import { useLocation } from 'react-router-dom';
-import ReactMarkdown from 'react-markdown';
+import React from "react";
+import { useLocation } from "react-router-dom";
+import ReactMarkdown from "react-markdown";
+import logo from './logo.png'
+import userlogo from './userlogo.png'
 
-export default function Searchpage() {
+export default function Searchpage({ selectedAnswer }) {
   const location = useLocation();
-  const { question = "No question provided", answer = "No answer available" } = location.state || {};
+  const { question = "No question provided", answer = "" } = location.state || {};
+
+  //This  Function is used to  clean and format the answer which we are fetching from are database
+  const cleanAnswer = (answer) => {
+    return answer
+      .replace(/[#*]+/g, "")   
+};
+
+  const formattedAnswer = cleanAnswer(selectedAnswer || "");
 
   return (
     <>
@@ -16,8 +25,8 @@ export default function Searchpage() {
 
         <div className="box2 py-6 flex justify-start w-[50vw] items-center m-auto space-x-5">
           <img
-            className="w-8"
-            src="https://lh3.googleusercontent.com/a/ACg8ocISAMs5M83ykWWzgRMF7lT8K1nZpKmOGAnYa8bNJGywdQ=s96-c"
+            className="w-8 rounded-full"
+            src={userlogo}
             alt=""
           />
           <div id="question1">{question}</div>
@@ -26,8 +35,8 @@ export default function Searchpage() {
         <div className="box3 py-6 bg-gray-700 flex justify-center w-full items-center">
           <div className="box overflow-hidden w-[50vw] flex justify-start space-x-5">
             <div className="w-8 h-8">
-              <div className="image w-9 h-9">
-                <img src="/luciferlogo.png" alt="" />
+              <div className="image w-8 rounded-full">
+                <img className="image w-8 h-8 rounded-full" src={logo} alt="logo" />
               </div>
             </div>
             <div className="flex flex-col space-y-5">
@@ -35,7 +44,16 @@ export default function Searchpage() {
                 {question}
               </div>
               <div id="solution" className="text-white">
-                <ReactMarkdown>{answer}</ReactMarkdown> {/* Render Markdown */}
+                {/* This is the response we are getting from Gemini API */}
+                <ReactMarkdown>{answer}</ReactMarkdown>
+
+
+                {/* And this is the response we are getting from are data base */}
+                {formattedAnswer && (
+                  <div className="">
+                    <p>{formattedAnswer}</p>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -50,3 +68,4 @@ export default function Searchpage() {
     </>
   );
 }
+

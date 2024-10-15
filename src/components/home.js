@@ -1,18 +1,21 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import '../App.css'
+import "../App.css";
+import Typical from "react-typical";
 export default function Home() {
-  const [question, setQuestion] = useState("");
+  const [question, setQuestion] = useState(""); //for storing the question
   const [error, setError] = useState(null);
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:5000/api/chat", { question }); // Ensure correct port (5000)
-      const answer = response.data.answer;
+      const response = await axios.post("http://localhost:5000/api/chat", {
+        question,
+      });
+      const answer = response.data.answer; //for storing the answer
 
       setError(null);
       // Navigate to Searchpage and pass the question and answer as state
@@ -24,8 +27,17 @@ export default function Home() {
 
   return (
     <>
-      <div className="right1 h-[100vh] bg-black w-10/12 flex content-center justify-center items-center flex-col">
-        <div className="text-center text-slate-400 w-full text-3xl mt-16 mb-10 font-bold">LUCIFER AI</div>
+      <div className="right1   min-h-screen bg-black w-10/12 flex content-center justify-center items-center flex-col">
+        <div className="text-center text-slate-400 w-full text-3xl mt-16 mb-10 font-bold">
+          LUCIFER AI
+        </div>
+        <div className="text-2xl font-bold text-white">
+          <Typical
+            steps={["What can I help with?", 1000]}
+            loop={3}
+            wrapper="p"
+          />
+        </div>
 
         <div className="input w-full text-center my-6 flex items-center justify-center flex-col">
           <form onSubmit={handleSubmit}>
@@ -37,7 +49,11 @@ export default function Home() {
                 value={question}
                 onChange={(e) => setQuestion(e.target.value)}
               />
-              <button id="sendButton" type="submit" className="relative -left-20 pl-10">
+              <button
+                id="sendButton"
+                type="submit"
+                className="relative -left-20 pl-10"
+              >
                 <svg
                   stroke="currentColor"
                   fill="none"
