@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../App.css";
-import Typical from "react-typical";
+// import Typical from "react-typical";
 export default function Home() {
   const [question, setQuestion] = useState(""); //for storing the question
   const [error, setError] = useState(null);
@@ -12,7 +12,7 @@ export default function Home() {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:5000/api/chat", {
+      const response = await axios.post("https://lucifer-ai-chatbot-backend.onrender.com", {
         question,
       });
       const answer = response.data.answer; //for storing the answer
@@ -30,13 +30,6 @@ export default function Home() {
       <div className="right1   min-h-screen bg-black w-10/12 flex content-center justify-center items-center flex-col">
         <div className="text-center text-slate-400 w-full text-3xl mt-16 mb-10 font-bold">
           LUCIFER AI
-        </div>
-        <div className="text-2xl font-bold text-white">
-          <Typical
-            steps={["What can I help with?", 1000]}
-            loop={3}
-            wrapper="p"
-          />
         </div>
 
         <div className="input w-full text-center my-6 flex items-center justify-center flex-col">
