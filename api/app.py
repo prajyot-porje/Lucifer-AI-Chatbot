@@ -10,7 +10,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app)  # Allows CORS for the entire app
+cors = CORS(app, resources={r"/*": {"origins": "*"}})  # or specific domains
+  # Allows CORS for the entire app
 
 # Configure Gemini AI API
 genai.configure(api_key=os.getenv("GENAI_API_KEY"))
