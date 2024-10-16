@@ -25,7 +25,7 @@ export default function Left({ setSelectedAnswer }) {
 
   const handleChatClick = async (question) => {
     try {
-      const response = await fetch("https://lucifer-ai-chatbot-backend.onrender.com/api/chats", {
+      const response = await fetch("https://lucifer-ai-chatbot-backend.onrender.com/api/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
