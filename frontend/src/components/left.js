@@ -10,7 +10,7 @@ export default function Left({ setSelectedAnswer }) {
   useEffect(() => {
     const fetchChats = async () => {
       try {
-        const response = await fetch("https://lucifer-ai-chatbot-backend.onrender.com/api/chat");
+        const response = await fetch("https://lucifer-ai-chatbot-backend.onrender.com/api/chats");
         const data = await response.json();
         setChats(data);
         setLoading(false);
@@ -25,7 +25,7 @@ export default function Left({ setSelectedAnswer }) {
 
   const handleChatClick = async (question) => {
     try {
-      const response = await fetch("https://lucifer-ai-chatbot-backend.onrender.com/api/chat", {
+      const response = await fetch("https://lucifer-ai-chatbot-backend.onrender.com/api/chats", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
