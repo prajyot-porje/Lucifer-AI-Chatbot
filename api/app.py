@@ -59,16 +59,12 @@ DB_CLUSTER = os.getenv("MONGO_CLUSTER")
 encoded_username = quote_plus(DB_USERNAME)
 encoded_password = quote_plus(DB_PASSWORD)
 
-# Construct the MongoDB URI]
 MONGO_URI = f"mongodb+srv://{encoded_username}:{encoded_password}@{DB_CLUSTER}?retryWrites=true&w=majority"
 
-
-# Set the database name separately
-DB_NAME = "chatgpt"  # Specify your actual database name
-app.config["MONGO_URI"] = MONGO_URI + f"/{DB_NAME}"
+app.config["MONGO_URI"] = MONGO_URI 
 
 # Initialize PyMongo
-mongo = PyMongo(app)
+mongo = PyMongo(app,uri=MONGO_URI)
 
 @app.route("/api/chat", methods=["POST"])
 def qa():

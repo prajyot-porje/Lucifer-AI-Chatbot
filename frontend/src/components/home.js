@@ -11,11 +11,13 @@ export default function Home() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // /api/chat"
+
     try {
       const response = await axios.post("https://lucifer-ai-chatbot-backend.onrender.com/api/chat", {
         question,
       });
-      const answer = response.data.answer; //for storing the answer
+      const answer =  response.data.answer; //for storing the answer
 
       setError(null);
       // Navigate to Searchpage and pass the question and answer as state

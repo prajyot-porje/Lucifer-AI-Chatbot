@@ -36,7 +36,7 @@ export default function Left({ setSelectedAnswer }) {
       setSelectedAnswer(data.answer);
       navigate("/Searchpage", { state: { question } }); 
     } catch (error) {
-      console.error("Error fetching answer:", error);
+      console.error("Error fetching answer: ", error);
     }
   };
 
