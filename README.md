@@ -22,7 +22,7 @@
 1. Clone the repository:
     ```terminal
     git clone https://github.com/prajyot-porje/Lucifer-AI-Chatbot.git
-    cd lucifer-ai
+    cd Lucifer-AI-Chatbot
     ```
 
 2. Install dependencies for both frontend and backend:
@@ -32,7 +32,7 @@
     npm install
 
     # Backend (Flask)
-    cd api/backend
+    cd api
     pip install -r requirements.txt
     ```
 
@@ -47,7 +47,7 @@
     npm start
 
     # Backend
-    cd ../backend
+    cd api
     flask run
     ```
 
