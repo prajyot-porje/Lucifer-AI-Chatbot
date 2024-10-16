@@ -16,24 +16,23 @@
 - [Screenshots](#screenshots)
 - [Environment Variables](#environment-variables)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## **Installation**
 
 1. Clone the repository:
-    ```bash
-    git clone https://github.com/your-username/lucifer-ai.git
+    ```terminal
+    git clone https://github.com/prajyot-porje/Lucifer-AI-Chatbot.git
     cd lucifer-ai
     ```
 
 2. Install dependencies for both frontend and backend:
-    ```bash
+    ```terminal
     # Frontend (React.js)
     cd frontend
     npm install
 
     # Backend (Flask)
-    cd ../backend
+    cd api/backend
     pip install -r requirements.txt
     ```
 
@@ -64,7 +63,9 @@ Once the servers are running, navigate to `http://localhost:3000` in your browse
 - **Gemini AI API**: AI-powered chatbot capabilities
 
 ## **Screenshots**
-_Add screenshots or demo GIFs here._
+![TYPING-RESPONSE](https://github.com/user-attachments/assets/3fc951b1-df20-4e60-afda-bdd892462dfe)
+![GENERATED-RESPONSE](https://github.com/user-attachments/assets/24f11fa5-5421-4572-8a10-8de2ed1a931f)
+
 
 ## **Environment Variables**
 
@@ -77,6 +78,4 @@ Ensure the following environment variables are set up in your project:
 
 We welcome contributions to improve **Lucifer AI**. If you would like to contribute, please follow the [contributing guidelines](CONTRIBUTING.md).
 
-## **License**
 
-This project is licensed under the **MIT License**.
